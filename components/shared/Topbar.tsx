@@ -24,7 +24,7 @@ const Topbar = () => {
         })}
       </div>
 
-      <Button>Join Now</Button>
+      <Button className="text-white">Join Now</Button>
     </div>
   );
 };
