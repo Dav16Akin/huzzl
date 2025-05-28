@@ -1,13 +1,26 @@
+export const CategoryOptions = [
+  { role: "hustler", text: "I want to showcase my hustle" },
+  { role: "supporter", text: "I just want to browse/buy" },
+];
+
+export const YearData = [
+  { label: "100 Level", value: "100L" },
+  { label: "200 Level", value: "200L" },
+  { label: "300 Level", value: "300L" },
+  { label: "400 Level", value: "400L" },
+  { label: "500 Level", value: "500L" },
+];
+
 export const NavLinks = [
-    {
-        name: "Home",
-        link: "/"
-    },
-     {
-        name: "Categories",
-        link: "/categories"
-    }
-]
+  {
+    name: "Home",
+    link: "/",
+  },
+  {
+    name: "Categories",
+    link: "/categories",
+  },
+];
 
 export const HustleData = [
   {
@@ -17,7 +30,8 @@ export const HustleData = [
     year: "200 Level",
     category: "E-commerce",
     imageUrl: "/sneakers.jpg",
-    description: "Orders sneakers from China/US and resells to Nigerian students at 3x profit",
+    description:
+      "Orders sneakers from China/US and resells to Nigerian students at 3x profit",
   },
   {
     id: 2,
@@ -35,7 +49,8 @@ export const HustleData = [
     year: "400 Level",
     category: "Writing Services",
     imageUrl: "/cv-writing.jpg",
-    description: "Helps students craft professional CVs for internships/jobs (₦3,000 per CV)",
+    description:
+      "Helps students craft professional CVs for internships/jobs (₦3,000 per CV)",
   },
   {
     id: 4,

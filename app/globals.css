@@ -119,3 +119,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+.PhoneInputInput {
+  outline: none;
+  margin-left: 4px;
+  background: var(--background);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.PhoneInputInput::placeholder {
+  color: #1a1d21;
+}

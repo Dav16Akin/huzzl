@@ -12,7 +12,7 @@ const HeroButton = () => {
       {data.map((btn, index) => {
         return (
           <Button
-            className={`py-6 px-8`}
+            className={`${btn.type === "outline" ? "text-black" : " text-white"} py-6 px-8`}
             variant={btn.type === "outline" ? "outline" : undefined}
             key={index}
           >

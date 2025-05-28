@@ -28,8 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Topbar/>
-        {children}
+        <Topbar />
+        <main className="flex flex-col items-center justify-center bg-white">{children}</main>
       </body>
     </html>
   );
