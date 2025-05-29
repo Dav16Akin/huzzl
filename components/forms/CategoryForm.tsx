@@ -5,7 +5,7 @@ import { Form, FormControl, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubmitButton from "../SubmitButton";
 import CustomFormField from "../CustomFormField";
 import { FormFieldType } from "./InformationForm";
@@ -13,10 +13,27 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { CategoryOptions } from "@/constants";
 import { Label } from "../ui/label";
 import { useRouter } from "next/navigation";
+import { fetchUser, updateUserCategory } from "@/lib/actions/user.actions";
 
-const CategoryForm = () => {
+interface Props {
+  userId: string;
+}
+
+const CategoryForm = ({ userId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserClient = async () => {
+      const data = await fetchUser(userId);
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data)); // ✅ stringified
+    };
+
+    fetchUserClient();
+  }, [userId]);
+
   const form = useForm<z.infer<typeof CategoryFormValidation>>({
     resolver: zodResolver(CategoryFormValidation),
     defaultValues: {
@@ -27,11 +44,24 @@ const CategoryForm = () => {
   const selectedRole = form.watch("role");
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof CategoryFormValidation>) {
+  async function onSubmit(values: z.infer<typeof CategoryFormValidation>) {
+    const { role } = values;
     setIsLoading(true);
-    console.log(values);
-    router.push("/onboarding/1/profile")
-    setIsLoading(false);
+
+    try {
+      await updateUserCategory({ userId, role });
+
+      if (role === "supporter") {
+        router.push("/categories");
+        return;
+      }
+
+      router.push(`/onboarding/${userId}/profile`);
+    } catch (error: any) {
+      console.error("Error in choosing category: ", error);
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <Form {...form}>

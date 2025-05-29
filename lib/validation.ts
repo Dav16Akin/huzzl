@@ -27,8 +27,8 @@ export const CategoryFormValidation = z.object({
 });
 
 export const ProfileFormValidation = z.object({
-  fullname: z.string().min(2, "Full name is required"),
-  department: z.string().optional(),
+  businessname: z.string().min(2, "Business Name name is required"),
+  department: z.string(),
   year: z.string().min(2, "Please select your year of study"),
   instagram: z.string().optional(),
   whatsapp: z
@@ -37,4 +37,5 @@ export const ProfileFormValidation = z.object({
       /^(\+?\d{8,15})$/,
       "Enter a valid WhatsApp number (8–15 digits, optional +)"
     ),
+  profileImage: z.string().url(),
 });

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import CustomFormField from "../CustomFormField";
 import { Form } from "../ui/form";
 import SubmitButton from "../SubmitButton";
-// import { useStep } from "@/context/StepContext";
+import { createUser } from "@/lib/actions/user.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -36,13 +36,22 @@ const InformationForm = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof InformationFormValidation>) {
+  async function onSubmit(values: z.infer<typeof InformationFormValidation>) {
+    const { email, password , fullname, phone} = values;
     setIsLoading(true);
-    console.log(values);
-    form.reset();
-    router.push("/onboarding/1/getting-started")
-    // toggleStep(1)
-    setIsLoading(false);
+
+    try {
+      const userId = await createUser({ password, email, fullname, phone });
+
+    
+      router.push(`/onboarding/${userId}/getting-started`);
+
+      form.reset();
+    } catch (error: any) {
+      console.error("Error creating user: ", error);
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <Form {...form}>
