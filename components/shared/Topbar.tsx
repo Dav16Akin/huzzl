@@ -9,12 +9,10 @@ import { usePathname } from "next/navigation";
 const Topbar = () => {
   const path = usePathname();
 
-  const user =
-    typeof window !== "undefined" ? localStorage.getItem("user") : null;
+  // const user =
+  //   typeof window !== "undefined" ? localStorage.getItem("user") : null;
 
-  console.log(user);
-
-  if (path.startsWith("/onboarding")) return null;
+  // if (path.startsWith("/onboarding")) return null;
 
   return (
     <div className="flex items-center justify-between px-8 py-4">

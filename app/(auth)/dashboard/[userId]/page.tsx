@@ -1,8 +1,8 @@
 import React from 'react'
 
-const page = () => {
+const page = ({userId} : {userId: string}) => {
   return (
-    <div>page</div>
+    <div>page here</div>
   )
 }
 

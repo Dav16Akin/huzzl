@@ -13,12 +13,11 @@ import { FormFieldType } from "./InformationForm";
 import { YearData } from "@/constants";
 import { SelectItem } from "../ui/select";
 import ProfileImageUpload from "../ProfileImageUpload";
-import { updateUser } from "@/lib/actions/user.actions";
+import { fetchUser, updateUser } from "@/lib/actions/user.actions";
 
 const ProfileForm = ({ userId }: { userId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
 
   const form = useForm<z.infer<typeof ProfileFormValidation>>({
     resolver: zodResolver(ProfileFormValidation),
@@ -52,6 +51,13 @@ const ProfileForm = ({ userId }: { userId: string }) => {
         profileImage: profileImage,
         whatsapp: whatsapp,
       });
+
+      const fetchUserClient = async () => {
+        const data = await fetchUser(userId);
+        localStorage.setItem("user", JSON.stringify(data)); // ✅ stringified
+      };
+
+      fetchUserClient();
 
       form.reset();
       router.push(`/dashboard/${userId}`);

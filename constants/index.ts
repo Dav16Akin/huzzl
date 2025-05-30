@@ -30,6 +30,7 @@ export const HustleData = [
     year: "200 Level",
     category: "E-commerce",
     imageUrl: "/sneakers.jpg",
+    featured: true,
     description:
       "Orders sneakers from China/US and resells to Nigerian students at 3x profit",
   },
@@ -41,6 +42,7 @@ export const HustleData = [
     category: "Food Business",
     imageUrl: "/small-chops.jpg",
     description: "Sells puff-puff, spring rolls, and shawarma in UNILAG hostel",
+    featured: true,
   },
   {
     id: 3,
@@ -49,6 +51,7 @@ export const HustleData = [
     year: "400 Level",
     category: "Writing Services",
     imageUrl: "/cv-writing.jpg",
+    featured: false,
     description:
       "Helps students craft professional CVs for internships/jobs (₦3,000 per CV)",
   },
@@ -59,6 +62,7 @@ export const HustleData = [
     year: "100 Level",
     category: "Tech Reselling",
     imageUrl: "/phones.jpg",
+    featured: true,
     description: "Buys UK-used phones and resells to students in UI campus",
   },
   {
@@ -68,6 +72,7 @@ export const HustleData = [
     year: "200 Level",
     category: "Fashion",
     imageUrl: "/aso-ebi.jpg",
+    featured: false,
     description: "Customizes Ankara outfits for weddings and owambes",
   },
   {
@@ -77,6 +82,7 @@ export const HustleData = [
     year: "300 Level",
     category: "Transportation",
     imageUrl: "/okada.jpg",
+    featured: true,
     description: "Offers bike rides within UNIBEN campus for ₦50-₦100 per trip",
   },
 ];

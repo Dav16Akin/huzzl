@@ -1,4 +1,4 @@
-import Featured from "@/components/Featured";
+import Featured from "@/components/Trending";
 import HeroButton from "@/components/HeroButton";
 
 export default function Home() {
