@@ -13,7 +13,7 @@ import { FormFieldType } from "./InformationForm";
 import { YearData } from "@/constants";
 import { SelectItem } from "../ui/select";
 import ProfileImageUpload from "../ProfileImageUpload";
-import { fetchUser, updateUser } from "@/lib/actions/user.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 
 const ProfileForm = ({ userId }: { userId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,23 +51,14 @@ const ProfileForm = ({ userId }: { userId: string }) => {
         profileImage: profileImage,
         whatsapp: whatsapp,
       });
-
-      const fetchUserClient = async () => {
-        const data = await fetchUser(userId);
-        localStorage.setItem("user", JSON.stringify(data)); // ✅ stringified
-      };
-
-      fetchUserClient();
-
-      form.reset();
+      
       router.push(`/dashboard/${userId}`);
+      form.reset();
     } catch (error: any) {
       console.error("Error in creating profile: ", error);
     } finally {
       setIsLoading(false);
     }
-    form.reset();
-    router.push("/dashboard/1");
   }
 
   return (
