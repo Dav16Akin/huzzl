@@ -1,17 +1,4 @@
 import { createUploadthing, type FileRouter } from "uploadthing/server";
-import { UploadThingError } from "uploadthing/server";
-import { updateUserProfilePicture } from "@/lib/actions/user.actions";
-
-declare module "next-auth" {
-  interface Session {
-    user: {
-      fullname?: string | null;
-      email?: string | null;
-      image?: string | null;
-      id?: string | null;
-    };
-  }
-}
 
 const f = createUploadthing();
 
@@ -24,6 +11,14 @@ export const ourFileRouter = {
       console.log("File URL:", file.url);
       // Optionally update the user profile
     }),
+
+  hustleImageUploader: f({
+    image: { maxFileSize: "8MB", maxFileCount: 3 }
+  })
+    .onUploadComplete(async ({ file }) => {
+      console.log("Hustle image uploaded:", file.url);
+      // Optionally handle the uploaded hustle image here
+    })
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;

@@ -16,7 +16,7 @@ const Topbar = () => {
 
   return (
     <div className="flex items-center justify-between px-8 py-4">
-      <div>HustleO</div>
+      <div>Huzzl</div>
 
       <div className="flex gap-4">
         {NavLinks.map((data, index) => {

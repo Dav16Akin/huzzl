@@ -45,7 +45,7 @@ export async function fetchUser(userId: string) {
 
     const user = await User.findOne({ _id: userId });
 
-    return await JSON.parse(JSON.stringify(user));
+    return JSON.parse(JSON.stringify(user));
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }

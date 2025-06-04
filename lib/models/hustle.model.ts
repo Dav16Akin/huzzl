@@ -7,22 +7,31 @@ const hustleSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Design", "Fashion", "Food", "Tech", "Art", "Craft", "Other"],
+      enum: [
+        "Design",
+        "Fashion",
+        "Food",
+        "Tech",
+        "Art",
+        "Craft",
+        "Other",
+        "Tutoring",
+        "Photography",
+      ],
     },
-    price: { type: Number }, // Optional, if it's a paid service/product
+    price: [{ min: Number, max: Number }], // Optional, if it's a paid service/product
     images: [{ type: String }], // Store Cloudinary URLs or file paths
     tags: [{ type: String }], // Optional - for search and filtering
-
-    contact: {
-      instagram: { type: String },
-      whatsapp: { type: String },
-      email: { type: String },
-    },
 
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
 
     isActive: {

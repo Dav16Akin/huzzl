@@ -1,9 +1,14 @@
-import React from 'react'
+import DashboardHome from "@/components/DashboardHome";
+import React from "react";
 
-const page = ({userId} : {userId: string}) => {
+const page = ({ params }: ParamProps) => {
+  const userId = params.userId;
+
   return (
-    <div>page here</div>
-  )
-}
+    <div className="w-full">
+      <DashboardHome userId={userId} />
+    </div>
+  );
+};
 
-export default page
+export default page;

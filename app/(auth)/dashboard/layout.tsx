@@ -6,7 +6,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "HustleO Dashboard page",
+  description: "Huzzl Dashboard page",
 };
 
 export default function RootLayout({
@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <main className="w-full ">
         <SidebarTrigger />
-        {children}
+        <div className="w-full h-screen flex flex-col">{children}</div>
       </main>
     </SidebarProvider>
   );

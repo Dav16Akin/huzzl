@@ -6,13 +6,11 @@ import Image from "next/image";
 
 interface ProfileImageUploadProps {
   onUpload: (url: string) => void;
-  userId: string;
   initialImageUrl?: string;
 }
 
 const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   onUpload,
-  userId,
   initialImageUrl = "",
 }) => {
   const [imageUrl, setImageUrl] = useState(initialImageUrl);

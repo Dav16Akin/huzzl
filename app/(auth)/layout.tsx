@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Auth",
-  description: "HustleO Authentication page",
+  description: "Huzzl Authentication page",
 };
 
 export default function RootLayout({

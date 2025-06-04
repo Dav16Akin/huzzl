@@ -1,6 +1,6 @@
 
 
-# Hustleo 🚀  
+# Huzzl 🚀  
 *A platform for university students to showcase their side hustles, projects, and skills.*  
 
 [![Next.js](https://img.shields.io/badge/Next.js-13+-black?logo=next.js)](https://nextjs.org/)  

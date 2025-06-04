@@ -1,56 +1,127 @@
 import Image from "next/image";
 import React from "react";
 import { Badge } from "../ui/badge";
-import { TrendingUp, Users } from "lucide-react";
+import {
+  ExternalLink,
+  Heart,
+  MapPin,
+  Star,
+  Tags,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import { Button } from "../ui/button";
 
 export type HustleTypeData = {
   id: number;
   title: string;
-  student: string;
-  year: string;
+  owner: { fullname: string; year: string };
+  price: [{ min: number; max: number }];
+  tags: string[];
   category: string;
-  imageUrl: string;
+  images: string[];
+  fullname: string;
   description: string;
   featured: boolean;
 };
 
 const Card = ({
-  imageUrl,
+  images,
   title,
-  year,
+  owner,
   category,
-  student,
+  tags,
   description,
+  price,
   featured,
 }: HustleTypeData) => {
   return (
-    <div className="p-4 max-w-sm bg-white transition duration-300 ease-in-out hover:scale-105 ">
-      <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden ">
-        {featured && (
-          <div className="absolute top-4 left-4 z-10">
-            <div className="bg-gradient-to-r from-orange to-orange-400 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-              <TrendingUp className="w-4 h-4" />
-              Featured
-            </div>
+    <div
+      className={`bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group ${
+        featured ? "ring-4 ring-yellow-400 ring-opacity-50" : ""
+      }`}
+    >
+      {/* Featured Badge */}
+      {featured && (
+        <div className="absolute top-4 left-4 z-10">
+          <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+            <TrendingUp className="w-4 h-4" />
+            Featured
           </div>
-        )}
+        </div>
+      )}
+
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden">
         <Image
-          className="object-cover border rounded-lg"
-          src={imageUrl}
+          src={images[0]}
           alt={title}
           fill
+          className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      <div className="space-y-2">
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-        <p className="text-gray-600 text-sm flex gap-2">
-          <Users className="w-4 h-4" />
-          {student} • <span className="font-medium">{year}</span>
-        </p>
-        <p className="text-sm mt-2 text-gray-700">{description}</p>
-        <Badge variant="outline" className="mt-3 bg-yellow-50 text-amber-800">
-          {category}
-        </Badge>
+
+      {/* Content */}
+      <div className="p-6">
+        <div className="flex items-start justify-between mb-3">
+          <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
+            {title}
+          </h3>
+          <button className="text-gray-400 hover:text-red-500 transition-colors">
+            <Heart className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-1">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <span className="font-semibold text-gray-800">
+              {/* {rating} */}
+            </span>
+            {/* <span className="text-gray-500">({reviews})</span> */}
+          </div>
+          <span className="text-gray-300">•</span>
+          <span className="text-purple-600 font-semibold space-x-2">
+            <Image
+              src="/assets/icons/naira-sign.svg"
+              alt="naira icon"
+              width={12}
+              height={12}
+              className="inline"
+            />
+            {price[0].min} - {price[0].max}
+          </span>
+        </div>
+
+        <p className="text-gray-600 mb-4 line-clamp-2">{description}</p>
+
+        <div className="flex items-center gap-2 mb-4">
+          <Users className="w-4 h-4 text-gray-400" />
+          <span className="text-sm text-gray-600">{owner.fullname}</span>
+          <span className="text-gray-300">•</span>
+          <MapPin className="w-4 h-4 text-gray-400" />
+          {/* <span className="text-sm text-gray-600">{university}</span> */}
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag, index) => (
+            <Badge
+              key={index}
+              variant="outline"
+              className="px-3 py-1 rounded-full text-xs font-medium"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
+
+        {/* Action Button */}
+        <Button className="w-full  text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+          View Details
+          <ExternalLink className="w-4 h-4" />
+        </Button>
       </div>
     </div>
   );

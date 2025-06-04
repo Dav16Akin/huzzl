@@ -1,10 +1,22 @@
-import Featured from "@/components/Trending";
+"use client";
+
+import Trending from "@/components/Trending";
 import HeroButton from "@/components/HeroButton";
+import { motion } from "motion/react";
 
 export default function Home() {
   return (
     <>
-      <div className="max-h-screen h-screen flex justify-center items-center text-center pb-24">
+      <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="max-h-screen h-screen flex justify-center items-center text-center pb-24"
+      >
         <section className="space-y-3">
           <h1 className="font-bold text-8xl">Discover Student Hustles</h1>
           <p className="font-semibold text-xl">
@@ -14,9 +26,9 @@ export default function Home() {
             <HeroButton />
           </div>
         </section>
-      </div>
+      </motion.div>
 
-      <Featured />
+      <Trending />
     </>
   );
 }

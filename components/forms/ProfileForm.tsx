@@ -94,7 +94,6 @@ const ProfileForm = ({ userId }: { userId: string }) => {
           renderSkeleton={(field) => (
             <FormControl>
               <ProfileImageUpload
-                userId={userId}
                 onUpload={(url) => form.setValue("profileImage", url)}
               />
             </FormControl>

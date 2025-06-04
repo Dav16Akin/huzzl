@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Sidebar,
@@ -23,6 +23,7 @@ import {
   UserPen,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 
 export function AppSidebar() {
   const [userId, setUserId] = useState<string | null>(null);
@@ -50,11 +51,11 @@ export function AppSidebar() {
       url: `/dashboard/${userId}/create`,
       icon: PenLine,
     },
-    {
-      label: "Messages / Inquiries",
-      url: `/dashboard/${userId}/messages`,
-      icon: Mail,
-    },
+    // {
+    //   label: "Messages / Inquiries",
+    //   url: `/dashboard/${userId}/messages`,
+    //   icon: Mail,
+    // },
     {
       label: "Analytics",
       url: `/dashboard/${userId}/analytics`,
@@ -70,25 +71,20 @@ export function AppSidebar() {
       url: `/dashboard/${userId}/settings`,
       icon: Settings,
     },
-    {
-      label: "Logout",
-      url: `/logout`,
-      icon: LogOut,
-    },
   ];
   return (
     <Sidebar>
-      <SidebarHeader className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance">
-            HustleO
+      <SidebarHeader className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        Huzzl Dashboard
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Hustler Menu</SidebarGroupLabel>
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-4">
               {DashboardOptions.map((options) => (
                 <SidebarMenuItem key={options.label}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton className="gap-4" asChild>
                     <a href={options.url} className="flex items-center gap-2">
                       <options.icon className="w-4 h-4" />
                       <span>{options.label}</span>
@@ -101,7 +97,12 @@ export function AppSidebar() {
         </SidebarGroup>
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <Button>
+          <LogOut />
+          Logout
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }
