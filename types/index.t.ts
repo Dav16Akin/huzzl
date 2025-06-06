@@ -12,9 +12,10 @@ declare type UserType = {
   year: string;
   instagram: string;
   whatsapp: string;
-  roles: string;
+  roles: "hustler" | "supporter";
   createdAt: string;
   inquiries: string;
   profileViews: string;
   hustles: any[];
 };
+  

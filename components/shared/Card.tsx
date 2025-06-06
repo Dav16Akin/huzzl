@@ -11,9 +11,10 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export type HustleTypeData = {
-  id: number;
+  _id: string;
   title: string;
   owner: { fullname: string; year: string };
   price: [{ min: number; max: number }];
@@ -26,6 +27,7 @@ export type HustleTypeData = {
 };
 
 const Card = ({
+  _id,
   images,
   title,
   owner,
@@ -83,14 +85,8 @@ const Card = ({
           </div>
           <span className="text-gray-300">•</span>
           <span className="text-purple-600 font-semibold space-x-2">
-            <Image
-              src="/assets/icons/naira-sign.svg"
-              alt="naira icon"
-              width={12}
-              height={12}
-              className="inline"
-            />
-            {price[0].min} - {price[0].max}
+            
+            ₦{price[0].min} - ₦{price[0].max}
           </span>
         </div>
 
@@ -118,10 +114,13 @@ const Card = ({
         </div>
 
         {/* Action Button */}
-        <Button className="w-full  text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
-          View Details
-          <ExternalLink className="w-4 h-4" />
-        </Button>
+        <Link href={`/details/${_id}`}>
+          {" "}
+          <Button className="w-full  text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+            View Details
+            <ExternalLink className="w-4 h-4" />
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -24,8 +24,11 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+  const pathname = usePathname();
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -74,9 +77,13 @@ export function AppSidebar() {
   ];
   return (
     <Sidebar>
-      <SidebarHeader className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-        Huzzl Dashboard
-      </SidebarHeader>
+      <Link href={`/dashboard/${userId}`}>
+        {" "}
+        <SidebarHeader className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Huzzl Dashboard
+        </SidebarHeader>
+      </Link>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
@@ -84,11 +91,21 @@ export function AppSidebar() {
             <SidebarMenu className="gap-4">
               {DashboardOptions.map((options) => (
                 <SidebarMenuItem key={options.label}>
-                  <SidebarMenuButton className="gap-4" asChild>
-                    <a href={options.url} className="flex items-center gap-2">
+                  <SidebarMenuButton
+                    className={`${
+                      pathname.startsWith(options.url)
+                        ? "bg-black text-white hover:bg-black/90 hover:text-white"
+                        : ""
+                    }`}
+                    asChild
+                  >
+                    <Link
+                      href={options.url}
+                      className="flex items-center gap-2"
+                    >
                       <options.icon className="w-4 h-4" />
                       <span>{options.label}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -100,7 +117,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <Button>
           <LogOut />
-          Logout
+          Signout
         </Button>
       </SidebarFooter>
     </Sidebar>

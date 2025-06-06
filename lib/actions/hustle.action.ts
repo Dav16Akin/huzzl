@@ -76,12 +76,31 @@ export async function getAllHustles() {
         model: User,
         select: "_id fullname year businessname",
       })
-      .sort({ createdAt: -1 })
-      .lean();
-
+      .sort({ createdAt: -1 }) // Note: latest first
+      .lean(); // Note: makes the result a plain object
 
     return JSON.parse(JSON.stringify(allHustles));
   } catch (error) {
     throw new Error(`Error in fetching all Hustles : ${error}`);
+  }
+}
+
+export async function fetchHustle(id: string) {
+  try {
+    await connectToDB();
+
+    const hustle = await Hustle.findById({ _id: id }).populate({
+      path: "owner",
+      model: User,
+      select: "_id fullname year businessname profileImage"
+    });
+
+    if (!hustle) {
+      throw new Error(`No hustle found with id: ${id}`);
+    }
+
+    return JSON.parse(JSON.stringify(hustle));
+  }catch (error) {
+    throw new Error(`Error in fetching hustle : ${error}`);
   }
 }

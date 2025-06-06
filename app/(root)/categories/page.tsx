@@ -38,8 +38,6 @@ const page = () => {
     getAllHustlesData();
   }, []);
 
-  console.log(hustles);
-
   const filteredHustles = useMemo(() => {
     let filtered = hustles.filter((hustle) => {
       const matchesSearch =
@@ -57,6 +55,7 @@ const page = () => {
 
     return filtered;
   }, [searchTerm, hustles, selectedCategory]);
+
 
   return (
     <div className="w-full flex flex-col items-center">

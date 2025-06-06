@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "../../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-
+import { Suspense } from "react";
+import Loading from "@/components/shared/Loading";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -19,7 +20,9 @@ export default function RootLayout({
       <AppSidebar />
       <main className="w-full ">
         <SidebarTrigger />
-        <div className="w-full h-screen flex flex-col">{children}</div>
+        <Suspense fallback={<Loading/>}>
+          <div className="w-full h-screen flex flex-col">{children}</div>
+        </Suspense>
       </main>
     </SidebarProvider>
   );
