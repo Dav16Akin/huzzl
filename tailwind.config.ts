@@ -53,7 +53,6 @@ export default withUt({
   			},
   			black: '#191923',
   			pink: '#BF1363',
-  			blue: '#0E79B2',
   			orange: '#F39237',
   			white: '#FBFEF9',
   			sidebar: {

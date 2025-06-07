@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Topbar />
-        <main className="flex flex-col items-center justify-center bg-white">{children}</main>
+        <main className="flex flex-col items-center justify-center gradient-bg">{children}</main>
       </body>
     </html>
   );

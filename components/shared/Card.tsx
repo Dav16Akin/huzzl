@@ -39,7 +39,7 @@ const Card = ({
 }: HustleTypeData) => {
   return (
     <div
-      className={`bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group ${
+      className={`rounded-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group ${
         featured ? "ring-4 ring-yellow-400 ring-opacity-50" : ""
       }`}
     >
@@ -54,7 +54,7 @@ const Card = ({
       )}
 
       {/* Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 rounded-md overflow-hidden">
         <Image
           src={images[0]}
           alt={title}
@@ -67,7 +67,7 @@ const Card = ({
       {/* Content */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
+          <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-500 transition-colors">
             {title}
           </h3>
           <button className="text-gray-400 hover:text-red-500 transition-colors">
@@ -77,14 +77,14 @@ const Card = ({
 
         <div className="flex items-center gap-2 mb-3">
           <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <Star className="w-4 h-4 fill-orange text-orange" />
             <span className="font-semibold text-gray-800">
               {/* {rating} */}
             </span>
             {/* <span className="text-gray-500">({reviews})</span> */}
           </div>
           <span className="text-gray-300">•</span>
-          <span className="text-purple-600 font-semibold space-x-2">
+          <span className="text-blue-500 font-semibold space-x-2">
             
             ₦{price[0].min} - ₦{price[0].max}
           </span>
@@ -116,7 +116,7 @@ const Card = ({
         {/* Action Button */}
         <Link href={`/details/${_id}`}>
           {" "}
-          <Button className="w-full  text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+          <Button className="w-full  text-white py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
             View Details
             <ExternalLink className="w-4 h-4" />
           </Button>
