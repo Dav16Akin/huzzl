@@ -67,7 +67,7 @@ export default async function page({ params }: { params: { _id: string } }) {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content - Left & Center */}
           <div className="lg:col-span-2 space-y-8">
@@ -87,7 +87,7 @@ export default async function page({ params }: { params: { _id: string } }) {
 
             {/* Title */}
             <div className="space-y-4">
-              <h1 className="text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-5xl font-bold text-left text-gray-900 leading-tight">
                 {hustle.title}
               </h1>
               <div className="flex items-center gap-6 text-gray-600">

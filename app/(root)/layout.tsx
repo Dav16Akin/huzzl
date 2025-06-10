@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Topbar from "@/components/shared/Topbar";
+import { AuthProvider } from "../providers/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Topbar />
-        <main className="flex flex-col items-center justify-center gradient-bg">{children}</main>
+        <AuthProvider>
+          <Topbar />
+          <main className="flex flex-col items-center justify-center gradient-bg">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -13,6 +13,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { getSession, signOut } from "next-auth/react";
+
 import {
   ChartNetwork,
   LogOut,
@@ -32,15 +34,16 @@ export function AppSidebar() {
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser);
-        setUserId(parsed._id); // or parsed.id depending on your structure
-      } catch (err) {
-        console.error("Invalid user data in localStorage");
-      }
+   try {
+    const getId = async () => {
+      const session = await getSession()
+      setUserId(session?.user?.id)
     }
+
+    getId();
+   } catch (error) {
+    console.error("Error in getting session id", error)
+   }
   }, []);
 
   const DashboardOptions = [
@@ -115,7 +118,7 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        <Button>
+        <Button onClick={() => signOut({ callbackUrl: "/sign-in" })}>
           <LogOut />
           Signout
         </Button>

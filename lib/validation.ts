@@ -22,6 +22,13 @@ export const InformationFormValidation = z.object({
     .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
 });
 
+export const SignInValidation = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" }),
+});
+
 export const CategoryFormValidation = z.object({
   role: z.enum(["hustler", "supporter"]),
 });

@@ -4,6 +4,18 @@ import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import bcrypt from "bcrypt";
 
+export async function userExists(email: string) {
+  try {
+    await connectToDB();
+
+    const user = await User.findOne({email}).select("_id")
+
+    return JSON.parse(JSON.stringify(user))
+  } catch (error: any) {
+    throw new Error("Failed to check if user exists.", error);
+  }
+}
+
 interface CreateUserProps {
   password: string;
   email: string;

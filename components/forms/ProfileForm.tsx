@@ -14,6 +14,7 @@ import { YearData } from "@/constants";
 import { SelectItem } from "../ui/select";
 import ProfileImageUpload from "../ProfileImageUpload";
 import { updateUser } from "@/lib/actions/user.actions";
+import { getSession } from "next-auth/react";
 
 const ProfileForm = ({ userId }: { userId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +52,7 @@ const ProfileForm = ({ userId }: { userId: string }) => {
         profileImage: profileImage,
         whatsapp: whatsapp,
       });
-      
+
       router.push(`/dashboard/${userId}`);
       form.reset();
     } catch (error: any) {

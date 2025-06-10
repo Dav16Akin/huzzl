@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 import CustomFormField from "../CustomFormField";
 import { Form } from "../ui/form";
 import SubmitButton from "../SubmitButton";
-import { createUser } from "@/lib/actions/user.actions";
+import { createUser, userExists } from "@/lib/actions/user.actions";
+import { signIn } from "next-auth/react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -23,7 +24,6 @@ export enum FormFieldType {
 const InformationForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  // const { steps, toggleStep } = useStep();
 
   const form = useForm<z.infer<typeof InformationFormValidation>>({
     resolver: zodResolver(InformationFormValidation),
@@ -37,13 +37,28 @@ const InformationForm = () => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof InformationFormValidation>) {
-    const { email, password , fullname, phone} = values;
+    const { email, password, fullname, phone } = values;
     setIsLoading(true);
 
     try {
+      const user = await userExists(email);
+
+      if (user) {
+        form.setError("email", {
+          type: "manual",
+          message: "An account with this email already exists.",
+        });
+        return;
+      }
+
+      await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+
       const userId = await createUser({ password, email, fullname, phone });
 
-    
       router.push(`/onboarding/${userId}/getting-started`);
 
       form.reset();
