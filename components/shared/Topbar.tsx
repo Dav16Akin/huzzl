@@ -53,9 +53,9 @@ const Topbar = () => {
           <Image
             src={data?.user?.image}
             alt="user image"
-            width={28}
-            height={28}
-            className="rounded-full w-full h-full"
+            width={100}
+            height={100}
+            className="rounded-full w-10 h-10"
           />
           <Button onClick={() => signOut({ callbackUrl: "/sign-in" })} variant="outline">Log out</Button>
         </div>

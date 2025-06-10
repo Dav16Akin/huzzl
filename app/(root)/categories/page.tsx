@@ -83,7 +83,7 @@ const page = () => {
           </Badge>
         ))}
       </div>
-      <div className="lg:grid-cols-3 grid gap-8">
+      <div className="lg:grid-cols-3 grid gap-8 p-4">
         {filteredHustles.map((hustle) => (
           <Card key={hustle._id} {...hustle} />
         ))}
