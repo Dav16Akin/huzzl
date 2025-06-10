@@ -11,12 +11,12 @@
 - **Smooth Animations**: Powered by Framer Motion.  
 - **Form Validation**: Robust forms with Zod + React Hook Form.  
 - **Modern UI**: Built with shadcn/ui components.  
-- **Database**: MongoDB + Mongoose for storing student data.  
+- **Database**: MongoDB + Mongoose for storing student data + NextAuth.  
 ## Installation
 
 1. **Clone the repo**:  
    ```bash
-   git clone https://github.com/Dav16Akin/hustleo
+   git clone https://github.com/Dav16Akin/huzzl
    cd hustleo
     
 2.  **Install Dependencies**
@@ -27,7 +27,7 @@
 - **UI Library**: shadcn/ui  
 - **Animations**: Framer Motion  
 - **Forms**: React Hook Form + Zod  
-- **Backend**: Next.js API Routes + Mongoose/MongoDB  
+- **Backend**: Next.js API Routes + Mongoose/MongoDB + NextAuth
 - **Deployment**: Vercel (recommended)  
 ## Contributing
 
