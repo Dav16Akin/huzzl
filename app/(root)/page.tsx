@@ -23,8 +23,8 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-500 to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-gradient-to-tl from-orange to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 lg:w-72 lg:h-72 bg-gradient-to-tr from-blue-500 to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 lg:w-72 lg:h-72 bg-gradient-to-tl from-orange to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -35,8 +35,8 @@ export default function Home() {
         }}
         className="flex h-full overflow-auto flex-col justify-center items-center text-center pb-28"
       >
-        <section className="space-y-3 p-6">
-          <h1 className="font-bold text-9xl">
+        <section className="space-y-3 sm:space-y-8 p-6">
+          <h1 className="font-bold sm:text-6xl md:text-7xl text-5xl lg:text-9xl">
             Discover <span className="text-blue-600">Student</span>{" "}
             <span className="text-orange">Hustles</span>{" "}
           </h1>

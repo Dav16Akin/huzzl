@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 import { getSession, signOut } from "next-auth/react";
@@ -30,6 +31,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+  const {toggleSidebar} = useSidebar()
   const pathname = usePathname();
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -79,7 +81,7 @@ export function AppSidebar() {
     },
   ];
   return (
-    <Sidebar>
+    <Sidebar className="bg-background">
       <Link href={`/dashboard/${userId}`}>
         {" "}
         <SidebarHeader className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
@@ -93,8 +95,9 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="gap-4">
               {DashboardOptions.map((options) => (
-                <SidebarMenuItem key={options.label}>
+                <SidebarMenuItem key={options.label} >
                   <SidebarMenuButton
+                    onClick={toggleSidebar}
                     className={`${
                       pathname.startsWith(options.url)
                         ? "bg-black text-white hover:bg-black/90 hover:text-white"

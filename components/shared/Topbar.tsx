@@ -19,7 +19,9 @@ const Topbar = () => {
         setData(session);
       };
       getUser();
-    } catch (error) {console.log(error)}
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return (
@@ -57,7 +59,15 @@ const Topbar = () => {
             height={100}
             className="rounded-full w-10 h-10"
           />
-          <Button onClick={() => signOut({ callbackUrl: "/sign-in" })} variant="outline">Log out</Button>
+          <Button
+            onClick={() => signOut({ callbackUrl: "/sign-in" })}
+            variant="outline"
+          >
+            Log out
+          </Button>
+          <Link href={`/dashboard/${data.user.id}`}>
+            <Button>Dashboard</Button>
+          </Link>
         </div>
       ) : (
         <Link href="/register">

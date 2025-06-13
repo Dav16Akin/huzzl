@@ -19,7 +19,7 @@ const data = [
 
 const HeroButton = () => {
   return (
-    <div className="space-x-4 mt-8">
+    <div className="mt-8 flex flex-col sm:flex-row md:flex-row lg:flex-row gap-4 justify-center">
       {data.map((btn, index) => {
         return (
           <Link key={index} href={btn.url}>

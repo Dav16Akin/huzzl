@@ -4,7 +4,7 @@ import React from 'react'
 export default async function page () {
 
   return (
-    <div className='w-full flex flex-col gap-4 items-center pt-14'>
+    <div className='w-full flex flex-col p-4 pt-14  gap-4 items-center lg:pt-14'>
         <SignInForm/>
     </div>
   )

@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="w-full flex flex-col gap-4 items-center pt-14">
+    <div className="w-full flex flex-col p-4 pt-14  gap-4 items-center lg:pt-14">
       <InformationForm />
       <p className="text-gray-600">
         Already have an account?{" "}

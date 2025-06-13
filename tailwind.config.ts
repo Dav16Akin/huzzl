@@ -56,7 +56,7 @@ export default withUt({
   			orange: '#F39237',
   			white: '#FBFEF9',
   			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				DEFAULT: '#FBFEF9',
   				foreground: 'hsl(var(--sidebar-foreground))',
   				primary: 'hsl(var(--sidebar-primary))',
   				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
