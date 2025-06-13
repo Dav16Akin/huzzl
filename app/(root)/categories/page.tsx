@@ -3,7 +3,6 @@
 import Card from "@/components/shared/Card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { getAllHustles } from "@/lib/actions/hustle.action";
 import { SearchIcon } from "lucide-react";
 import React, { useEffect, useId, useMemo, useState } from "react";
@@ -69,7 +68,7 @@ const page = () => {
         ></Input>
       </div>
 
-      <div className="flex gap-4 p-4">
+      <div className="flex flex-wrap gap-4 p-4 ">
         {categories.map((category, index) => (
           <Badge
             variant="outline"
