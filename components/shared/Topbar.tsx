@@ -62,7 +62,7 @@ const Topbar = () => {
       {data ? (
         <div className="flex gap-4">
           <Image
-            src={data?.user?.image}
+            src={data?.user?.image || "/assets/icons/user.svg"}
             alt="user image"
             width={100}
             height={100}

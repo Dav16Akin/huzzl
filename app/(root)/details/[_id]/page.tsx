@@ -108,7 +108,7 @@ export default async function page({ params }: { params: { _id: string } }) {
                 <div className="flex items-center gap-6">
                   {hustle.owner?.profileImage && (
                     <Image
-                      src={hustle.owner.profileImage}
+                      src={hustle.owner.profileImage || "/assets/icons/user.svg"}
                       alt={hustle.owner.fullname + " image"}
                       width={80}
                       height={80}

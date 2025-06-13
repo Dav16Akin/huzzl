@@ -18,7 +18,7 @@ const DashboardHome = ({
         <div className="flex items-center gap-4">
           {userData && (
             <Image
-              src={userData.profileImage || "/default-avatar.png"}
+              src={userData.profileImage || "/assets/icons/user.svg"}
               alt={`${userData.businessname} image`}
               width={60}
               height={60}
