@@ -7,6 +7,15 @@ import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { AlignJustify } from "lucide-react";
 
 const Topbar = () => {
   const path = usePathname();
@@ -59,15 +68,28 @@ const Topbar = () => {
             height={100}
             className="rounded-full w-10 h-10"
           />
-          <Button
-            onClick={() => signOut({ callbackUrl: "/sign-in" })}
-            variant="outline"
-          >
-            Log out
-          </Button>
-          <Link href={`/dashboard/${data.user.id}`}>
-            <Button>Dashboard</Button>
-          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <AlignJustify />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Options</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Button
+                  onClick={() => signOut({ callbackUrl: "/sign-in" })}
+                  variant="outline"
+                >
+                  Log out
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={`/dashboard/${data.user.id}`}>
+                  <Button>Dashboard</Button>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       ) : (
         <Link href="/register">
