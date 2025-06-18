@@ -51,7 +51,7 @@ export default function Home() {
           <h3>
             Made by{" "}
             <Link
-              href="https://portfoliov1-two-iota.vercel.app/"
+              href="https://davidakin.vercel.app/"
               className="text-orange underline"
             >
               this guy
