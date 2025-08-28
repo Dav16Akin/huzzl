@@ -1,64 +1,74 @@
 "use client";
 
 import HeroButton from "@/components/HeroButton";
-import { ArrowRightIcon } from "lucide-react";
-import { motion } from "motion/react";
-import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="overflow-hidden h-[92vh] bg-white relative">
-      <div className="dark bg-blue-500 text-foreground px-4 py-3">
-        <p className="flex justify-center text-sm">
-          <Link href="/categories" className="group">
-            <span className="me-1 text-base leading-none">✨</span>
-            A vibrant platform showcasing the side hustles, creativity, and
-            entrepreneurial spirit of students.
-            <ArrowRightIcon
-              className="ms-2 -mt-0.5 inline-flex opacity-60 transition-transform group-hover:translate-x-0.5"
-              size={16}
-              aria-hidden="true"
-            />
-          </Link>
-        </p>
-      </div>
+    <>
+      <div className="overflow-hidden h-[92vh] mt-20 bg-white">
+        <section className="flex px-32">
+          <div className="flex flex-col pt-16 items-start w-1/2">
+            <h1 className="font-bold text-left sm:text-6xl md:text-7xl text-5xl lg:text-9xl">
+              Discover Student Hustles
+            </h1>
+            <p className="text-black/70 text-xl">
+              A vibrant platform showcasing the side hustles, creativity, and
+              entrepreneurial spirit of students.
+            </p>
+            <div className="space-x-4">
+              <HeroButton />
+            </div>
+          </div>
 
-      <div className="absolute bottom-0 left-0 lg:w-72 lg:h-72 bg-gradient-to-tr from-blue-500 to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 lg:w-72 lg:h-72 bg-gradient-to-tl from-orange to-transparent rounded-full blur-2xl opacity-70 pointer-events-none" />
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="flex h-full overflow-auto flex-col justify-center items-center text-center pb-28"
-      >
-        <section className="space-y-3 sm:space-y-8 p-6">
-          <h1 className="font-bold sm:text-6xl md:text-7xl text-5xl lg:text-9xl">
-            Discover <span className="text-blue-600">Student</span>{" "}
-            <span className="text-orange">Hustles</span>{" "}
-          </h1>
-          <p className="font-semibold text-black/70 text-xl">
-            Explore crafts and side hustles of students at your university
-          </p>
-          <div className="space-x-4">
-            <HeroButton />
+          <div className="h-[900px] w-1/2 relative">
+            <Image
+              src="/assets/guy.png"
+              alt="guy image"
+              fill
+              className="object-cover"
+            />
           </div>
         </section>
-        <div className="p-8 w-full text-center bg-transparent bg-opacity-0">
-          <h3>
-            Made by{" "}
-            <Link
-              href="https://davidakin.vercel.app/"
-              className="text-orange underline"
+      </div>
+
+      {/* Logos Section */}
+      <section className="w-full py-12 bg-black flex items-center justify-center">
+        <div className="flex gap-20 flex-wrap justify-center">
+          {[
+            { src: "/assets/logos/Next.js.svg", alt: "Next.js" },
+            { src: "/assets/logos/Tailwind CSS.svg", alt: "Tailwind CSS" },
+            { src: "/assets/logos/MongoDB.svg", alt: "MongoDB" },
+            { src: "/assets/logos/Node.js.svg", alt: "Node.js" },
+            { src: "/assets/logos/Vercel.svg", alt: "Vercel" },
+          ].map((logo, index) => (
+            <div
+              key={index}
+              className="h-12 w-auto invert grayscale opacity-80 hover:opacity-100 transition"
             >
-              this guy
-            </Link>
-          </h3>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={50}
+                height={50}
+                className="filter-green"
+              />
+            </div>
+          ))}
         </div>
-      </motion.div>
-    </div>
+      </section>
+
+      {/* <div className="p-8 w-full text-center bg-transparent bg-opacity-0">
+              <h3>
+                Made by{" "}
+                <Link
+                  href="https://davidakin.vercel.app/"
+                  className="text-orange underline"
+                >
+                  this guy
+                </Link>
+              </h3>
+            </div> */}
+    </>
   );
 }

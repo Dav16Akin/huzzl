@@ -2,43 +2,59 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+// import React, { useEffect, useState } from "react";
+// import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
-import { getSession, signOut } from "next-auth/react";
-import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { AlignJustify } from "lucide-react";
+import { Input } from "../ui/input";
+import { Search, ShoppingBagIcon } from "lucide-react";
+import { Button } from "../ui/button";
+// import { getSession, signOut } from "next-auth/react";
+// import Image from "next/image";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+// import { AlignJustify } from "lucide-react";
 
 const Topbar = () => {
   const path = usePathname();
-  const [data, setData] = useState<any | null>(null);
+  // const [data, setData] = useState<any | null>(null);
 
-  useEffect(() => {
-    try {
-      const getUser = async () => {
-        const session = await getSession();
-        setData(session);
-      };
-      getUser();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const getUser = async () => {
+  //       const session = await getSession();
+  //       setData(session);
+  //     };
+  //     getUser();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return (
-    <div className="flex items-center justify-between px-8 py-4">
+    <div className="flex items-center fixed top-0 w-full z-50 bg-white justify-between gap-20 px-16 py-4">
       <div className="flex items-center gap-8">
         <Link className="flex items-center" href="/">
-          <h3>Huzzl</h3>
+          <h1 className="m-0 text-left font-general leading-none uppercase text-3xl">
+            Hustle <span>.</span> <br /> Connect
+          </h1>
         </Link>
+      </div>
+
+      <div className="rounded-full outline flex items-center w-full">
+        <Input className="outline-none h-14 shadow-none flex-grow border-0 focus-visible:ring-0" />
+        <Button className="flex items-center rounded-full bg-mygreen h-11 m-1">
+          <Search className="text-white" />
+        </Button>
+      </div>
+
+      <div className="flex gap-8 items-center">
+        <div>SignIn</div>
 
         <div className="flex gap-4">
           {NavLinks.map((data, index) => {
@@ -57,9 +73,13 @@ const Topbar = () => {
             );
           })}
         </div>
+
+        <div>
+          <ShoppingBagIcon />
+        </div>
       </div>
 
-      {data ? (
+      {/* {data ? (
         <div className="flex gap-4">
           <Image
             src={data?.user?.image || "/assets/icons/user.svg"}
@@ -95,7 +115,7 @@ const Topbar = () => {
         <Link href="/register">
           <Button className="text-white">Join Now</Button>
         </Link>
-      )}
+      )} */}
     </div>
   );
 };

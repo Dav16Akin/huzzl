@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Auth",
@@ -28,10 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-         <NextSSRPlugin
+      <body className={` antialiased`}>
+        <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
            * from the router to prevent additional information from being
@@ -40,7 +27,9 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <main className="flex flex-col items-center justify-center bg-white">{children}</main>
+        <main className="flex flex-col items-center justify-center bg-white">
+          {children}
+        </main>
       </body>
     </html>
   );

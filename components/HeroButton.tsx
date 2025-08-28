@@ -25,8 +25,8 @@ const HeroButton = () => {
           <Link key={index} href={btn.url}>
             <Button
               className={`${
-                btn.type === "outline" ? "text-black" : " text-white"
-              } py-6 px-8`}
+                btn.type === "outline" ? "text-black" : " text-white bg-mygreen"
+              } py-6 px-8 rounded-full`}
               variant={btn.type === "outline" ? "outline" : undefined}
             >
               {btn.label}
