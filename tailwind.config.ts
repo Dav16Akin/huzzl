@@ -56,9 +56,7 @@ export default withUt({
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        black: "#191923",
         mygreen: "#29524A",
-        orange: "#F39237",
         white: "#FBFEF9",
         sidebar: {
           DEFAULT: "#FBFEF9",
