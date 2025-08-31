@@ -1,7 +1,11 @@
 "use client";
 
 import HeroButton from "@/components/HeroButton";
+import Footer from "@/components/shared/Footer";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, CreditCard, Search, SquarePlus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -40,7 +44,7 @@ export default function Home() {
       </div>
 
       {/* Logos Section */}
-      <section className="w-full py-12 bg-gray-100 flex items-center justify-center">
+      <section className="w-full py-12 bg-gray-50 flex items-center justify-center">
         <div className="flex gap-20 flex-wrap justify-center">
           {[
             { src: "/assets/logos/Next.js.svg", alt: "Next.js" },
@@ -65,7 +69,85 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full h-[84vh]  relative">
+      {/* How it works section */}
+
+      <section className="text-center p-24 w-full space-y-4 relative">
+        <Image
+          src="/assets/layered-waves-haikei.svg"
+          alt="layered waves"
+          fill
+          className="w-full object-cover object-bottom"
+        />
+
+        <Badge className="bg-green-400">HOW IT WORKS</Badge>
+        <h1 className="z-20 text-2xl font-bold">
+          It's easy to Post and Find Hustles
+        </h1>
+
+        <div className="grid p-16 grid-cols-3 gap-8">
+          {/* Step 1 */}
+          <div className="relative border p-8 rounded-2xl bg-white shadow-sm">
+            <div className="rounded-full absolute left-[45%] top-[-15%] bg-mygreen w-12 h-12 flex items-center justify-center">
+              <SquarePlus className="text-white" />
+            </div>
+            <div>
+              <h2 className="font-semibold text-lg">Post a Hustle</h2>
+              <p className="text-sm text-gray-600">
+                Create a hustle listing and showcase your skills or small
+                business to students in your school.
+              </p>
+              <Link
+                href="/create-hustle"
+                className="inline-flex items-center text-mygreen mt-2"
+              >
+                Start posting <ArrowUpRight />
+              </Link>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="relative border p-8 rounded-2xl bg-white  shadow-sm">
+            <div className="rounded-full absolute left-[45%] top-[-15%] bg-mygreen w-12 h-12 flex items-center justify-center">
+              <Search className="text-white" />
+            </div>
+            <div>
+              <h2 className="font-semibold text-lg">Find Hustles</h2>
+              <p className="text-sm text-gray-600">
+                Browse through categories to discover services and connect with
+                hustlers near you.
+              </p>
+              <Link
+                href="/categories"
+                className="inline-flex items-center text-mygreen mt-2"
+              >
+                Browse marketplace <ArrowUpRight />
+              </Link>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="relative border p-8 rounded-2xl bg-white  shadow-sm">
+            <div className="rounded-full absolute left-[45%] top-[-15%] bg-mygreen w-12 h-12 flex items-center justify-center">
+              <CreditCard className="text-white" />
+            </div>
+            <div>
+              <h2 className="font-semibold text-lg">Make Secure Payment</h2>
+              <p className="text-sm text-gray-600">
+                Pay safely through the platform and enjoy peace of mind with
+                secure, reliable transactions.
+              </p>
+              <Link
+                href="/categories"
+                className="inline-flex items-center text-mygreen mt-2"
+              >
+                Explore hustles <ArrowUpRight />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full h-[84vh] bg-black relative">
         <Image
           src="/assets/wave-haikei.svg"
           alt="wave"
@@ -74,7 +156,7 @@ export default function Home() {
         />
 
         <div className="flex flex-col gap-14 p-24">
-          <h1 className="font-satoshi z-20">
+          <h1 className="text-white">
             Your Entrepreneurship Journey Starts Here - and Grows With You
           </h1>
 
@@ -97,7 +179,7 @@ export default function Home() {
             </div>
 
             {/* Personalized Hustle Plans */}
-            <div className="bg-black z-20 text-white p-6 flex flex-col justify-between">
+            <div className="bg-mygreen z-20 text-white p-6 flex flex-col justify-between">
               <div>
                 <h3 className="text-xl font-semibold mb-2">
                   Personalized Hustle Plans
@@ -177,7 +259,15 @@ export default function Home() {
                   this guy
                 </Link>
               </h3>
-            </div> */}
+            </div> 
+      */}
+
+      <div className="text-center p-24">
+        <Badge className="bg-green-400">MARKETPLACE</Badge>
+        <h1>Check The Hustle Of The Day</h1>
+        <p></p>
+      </div>
+      <Footer />
     </>
   );
 }
