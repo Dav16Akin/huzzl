@@ -54,7 +54,7 @@ const Topbar = () => {
       </div>
 
       <div className="flex gap-8 items-center">
-        <Link href="/sign-in">SignIn</Link>
+        <Link href="/register">SignIn</Link>
 
         <div className="flex gap-4">
           {NavLinks.map((data, index) => {
