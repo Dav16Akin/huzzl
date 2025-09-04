@@ -14,6 +14,6 @@ export const YearData = [
 export const NavLinks = [
   {
     name: "Marketplace",
-    link: "/categories",
+    link: "/marketplace",
   },
 ];

@@ -74,7 +74,7 @@ export async function getAllHustles() {
       .populate({
         path: "owner",
         model: User,
-        select: "_id fullname year businessname",
+        select: "_id fullname year businessname profileImage",
       })
       .sort({ createdAt: -1 }) // Note: latest first
       .lean(); // Note: makes the result a plain object

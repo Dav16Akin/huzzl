@@ -97,7 +97,7 @@ export default function Home() {
                 business to students in your school.
               </p>
               <Link
-                href="/create-hustle"
+                href="/sign-in"
                 className="inline-flex items-center text-mygreen mt-2"
               >
                 Start posting <ArrowUpRight />
@@ -117,7 +117,7 @@ export default function Home() {
                 hustlers near you.
               </p>
               <Link
-                href="/categories"
+                href="/marketplace"
                 className="inline-flex items-center text-mygreen mt-2"
               >
                 Browse marketplace <ArrowUpRight />
@@ -137,7 +137,7 @@ export default function Home() {
                 secure, reliable transactions.
               </p>
               <Link
-                href="/categories"
+                href="/marketplace"
                 className="inline-flex items-center text-mygreen mt-2"
               >
                 Explore hustles <ArrowUpRight />
