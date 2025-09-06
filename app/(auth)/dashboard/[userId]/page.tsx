@@ -5,7 +5,7 @@ import React from "react";
 
 
 export default async function page({ params }: ParamProps) {
-  const userId = params.userId;
+  const userId = params?.userId;
 
   const userData = await fetchUser(userId);
   const hustleData = await fetchUserHustles(userId);

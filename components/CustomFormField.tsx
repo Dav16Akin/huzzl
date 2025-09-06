@@ -19,7 +19,7 @@ interface CustomProps {
   iconAlt?: string;
   disabled?: boolean;
   children?: React.ReactNode;
-  renderSkeleton: (field: any) => React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {

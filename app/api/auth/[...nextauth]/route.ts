@@ -4,6 +4,34 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
+// Extend the built-in session and JWT types
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      image?: string;
+      role: string;
+    };
+  }
+  
+  interface User {
+    id: string;
+    email: string;
+    name: string;
+    image?: string;
+    role: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    role: string;
+  }
+}
+
 const authOptions = {
   providers: [
     CredentialsProvider({

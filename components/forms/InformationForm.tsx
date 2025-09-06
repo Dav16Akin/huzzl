@@ -10,7 +10,7 @@ import CustomFormField from "../CustomFormField";
 import { Form } from "../ui/form";
 import SubmitButton from "../SubmitButton";
 import { createUser, userExists } from "@/lib/actions/user.actions";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -41,9 +41,9 @@ const InformationForm = () => {
     setIsLoading(true);
 
     try {
-      const user = await userExists(email);
+      const existingUser = await userExists(email);
 
-      if (user) {
+      if (existingUser) {
         form.setError("email", {
           type: "manual",
           message: "An account with this email already exists.",
@@ -51,19 +51,56 @@ const InformationForm = () => {
         return;
       }
 
-      await signIn("credentials", {
-        redirect: false,
-        email: values.email,
-        password: values.password,
-      });
+      await signOut({ redirect: false });
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const userId = await createUser({ password, email, fullname, phone });
 
-      router.push(`/onboarding/${userId}/getting-started`);
+      if (!userId) {
+        form.setError("root", {
+          type: "manual",
+          message: "Failed to create user account. Please try again.",
+        });
+        return;
+      }
 
-      form.reset();
+      const signInResult = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+
+      if (signInResult?.error) {
+        console.error("Sign in error:", signInResult.error);
+        form.setError("root", {
+          type: "manual",
+          message:
+            "Account created but sign-in failed. Please try signing in manually.",
+        });
+        // Still redirect to sign-in page so they can try to login
+        router.push("/sign-in");
+        return;
+      }
+
+      if (signInResult?.ok) {
+        // Step 5: Redirect to onboarding with the new user ID
+        router.push(`/onboarding/${userId}/getting-started`);
+        form.reset();
+      } else {
+        form.setError("root", {
+          type: "manual",
+          message: "Something went wrong. Please try signing in.",
+        });
+        router.push("/sign-in");
+      }
     } catch (error: any) {
       console.error("Error creating user: ", error);
+      form.setError("root", {
+        type: "manual",
+        message:
+          "An error occurred while creating your account. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }

@@ -14,7 +14,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
 
 import {
   ChartNetwork,
@@ -31,22 +31,46 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
-  const {toggleSidebar} = useSidebar()
   const pathname = usePathname();
+  const { data: session, status, update } = useSession();
   const [userId, setUserId] = useState<string | null>(null);
 
-  useEffect(() => {
-   try {
-    const getId = async () => {
-      const session = await getSession()
-      setUserId(session?.user?.id)
-    }
+  console.log("Full session:", session);
+  console.log("userId-------: " + userId);
+  console.log("Session status:", status);
 
-    getId();
-   } catch (error) {
-    console.error("Error in getting session id", error)
-   }
-  }, []);
+  useEffect(() => {
+    const getId = async () => {
+      try {
+        // Force refresh the session to get the latest data
+        await update();
+        const freshSession = await getSession();
+
+        console.log("Fresh session:", freshSession);
+
+        // Use the correct property - should be id, not name
+        const userIdFromSession = freshSession?.user?.id;
+
+        if (userIdFromSession && userIdFromSession !== userId) {
+          setUserId(userIdFromSession);
+        }
+      } catch (error) {
+        console.error("Error in getting session id", error);
+      }
+    };
+
+    // Only run when session status changes or when we don't have a userId yet
+    if (status === "authenticated" && !userId) {
+      getId();
+    }
+  }, [status, update]);
+
+  // Alternative approach using useSession directly (recommended)
+  useEffect(() => {
+    if (session?.user?.id && session.user.id !== userId) {
+      setUserId(session.user.id);
+    }
+  }, [session?.user?.id]);
 
   const DashboardOptions = [
     {
@@ -95,9 +119,8 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="gap-4">
               {DashboardOptions.map((options) => (
-                <SidebarMenuItem key={options.label} >
+                <SidebarMenuItem key={options.label}>
                   <SidebarMenuButton
-                    onClick={toggleSidebar}
                     className={`${
                       pathname.startsWith(options.url)
                         ? "bg-black text-white hover:bg-black/90 hover:text-white"
