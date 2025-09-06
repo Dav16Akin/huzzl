@@ -46,7 +46,6 @@ const SignInForm = () => {
 
       const session = await getSession();
 
-      console.log(session);
 
       if (session?.user?.role === "hustler") {
         router.push(`/dashboard/${session?.user?.id}`);

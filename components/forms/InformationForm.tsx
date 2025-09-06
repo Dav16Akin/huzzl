@@ -35,7 +35,6 @@ const InformationForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof InformationFormValidation>) {
     const { email, password, fullname, phone } = values;
     setIsLoading(true);
@@ -84,7 +83,7 @@ const InformationForm = () => {
       }
 
       if (signInResult?.ok) {
-        // Step 5: Redirect to onboarding with the new user ID
+        // Redirect to onboarding with the new user ID
         router.push(`/onboarding/${userId}/getting-started`);
         form.reset();
       } else {

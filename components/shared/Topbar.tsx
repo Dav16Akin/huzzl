@@ -2,13 +2,19 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-// import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { Input } from "../ui/input";
 import { Search, ShoppingBagIcon } from "lucide-react";
 import { Button } from "../ui/button";
-// import { getSession, signOut } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 // import Image from "next/image";
 // import {
 //   DropdownMenu,
@@ -22,19 +28,23 @@ import { Button } from "../ui/button";
 
 const Topbar = () => {
   const path = usePathname();
-  // const [data, setData] = useState<any | null>(null);
+  const [data, setData] = useState<any | null>(null);
+  const [id, setUserID] = useState<any | null>(null);
+  const [role, setRole] = useState<any | null>(null);
 
-  // useEffect(() => {
-  //   try {
-  //     const getUser = async () => {
-  //       const session = await getSession();
-  //       setData(session);
-  //     };
-  //     getUser();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
+  useEffect(() => {
+    try {
+      const getUser = async () => {
+        const session = await getSession();
+        setData(session?.user?.name);
+        setUserID(session?.user?.id);
+        setRole(session?.user?.role)
+      };
+      getUser();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   return (
     <div className="flex items-center fixed top-0 w-full z-50 bg-white justify-between gap-20 px-16 py-4">
@@ -54,21 +64,19 @@ const Topbar = () => {
       </div>
 
       <div className="flex gap-8 items-center">
-        <Link href="/register">SignIn</Link>
-
         <div className="flex gap-4">
-          {NavLinks.map((data, index) => {
+          {NavLinks.map((d, index) => {
             return (
               <Link
                 className={`${
-                  path === data.link
+                  path === d.link
                     ? "text-orange underline underline-offset-4 transition-colors delay-75"
                     : ""
                 }`}
                 key={index}
-                href={data.link}
+                href={d.link}
               >
-                {data.name}
+                {d.name}
               </Link>
             );
           })}
@@ -77,45 +85,30 @@ const Topbar = () => {
         <div>
           <ShoppingBagIcon />
         </div>
-      </div>
 
-      {/* {data ? (
-        <div className="flex gap-4">
-          <Image
-            src={data?.user?.image || "/assets/icons/user.svg"}
-            alt="user image"
-            width={100}
-            height={100}
-            className="rounded-full w-10 h-10"
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <AlignJustify />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Options</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Button
-                  onClick={() => signOut({ callbackUrl: "/sign-in" })}
-                  variant="outline"
-                >
-                  Log out
-                </Button>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={`/dashboard/${data.user.id}`}>
-                  <Button>Dashboard</Button>
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      ) : (
-        <Link href="/register">
-          <Button className="text-white">Join Now</Button>
-        </Link>
-      )} */}
+        {data ? (
+          role === "hustler" ? (
+            <Link href={`/dashboard/${id}`}>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="rounded-full uppercase" asChild>
+                    <Button variant="outline">{data[0]}</Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Profile</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </Link>
+          ) : (
+            <>
+            
+            </>
+          )
+        ) : (
+          <Link href="/register">Signup</Link>
+        )}
+      </div>
     </div>
   );
 };
