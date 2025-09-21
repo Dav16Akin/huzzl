@@ -3,7 +3,6 @@
 import { NavLinks } from "@/constants";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-// import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { Input } from "../ui/input";
 import { Search, ShoppingBagIcon } from "lucide-react";
@@ -15,16 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-// import Image from "next/image";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-// import { AlignJustify } from "lucide-react";
+
 
 const Topbar = () => {
   const path = usePathname();
@@ -102,7 +92,7 @@ const Topbar = () => {
             </Link>
           ) : (
             <>
-            
+
             </>
           )
         ) : (

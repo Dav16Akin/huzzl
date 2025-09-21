@@ -3,6 +3,7 @@
 import Card from "@/components/shared/Card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getAllHustles } from "@/lib/actions/hustle.action";
 import { SearchIcon } from "lucide-react";
 import React, { useEffect, useId, useMemo, useState } from "react";
@@ -23,14 +24,22 @@ const categories = [
 const page = () => {
   const id = useId();
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [hustles, setHustle] = useState<any[]>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const getAllHustlesData = async () => {
       try {
         const data = await getAllHustles();
+
+        if (!data) {
+          console.error("Failed to fetch data");
+        }
+
         setHustle(data);
+        setIsLoading(false);
       } catch (error) {
         console.error(`Error in fetching all hustle data: ${error}`);
       }
@@ -83,9 +92,19 @@ const page = () => {
         ))}
       </div>
       <div className="lg:grid-cols-4 grid gap-8 p-24">
-        {filteredHustles.map((hustle) => (
-          <Card key={hustle._id} {...hustle} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 8 }).map((_, idx) => (
+              <div key={idx} className="flex flex-col space-y-3">
+                <Skeleton key={idx} className="h-[45vh]" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>
+            ))
+          : filteredHustles.map((hustle) => (
+              <Card key={hustle._id} {...hustle} />
+            ))}
       </div>
     </div>
   );
